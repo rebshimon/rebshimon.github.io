@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="yi" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="images/logo.png">
+<title>רבי ישעי'לע ביי רבי שמעון</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="דיין שליח צו רבי שמעון'ס מערה אין מירון: קוויטלעך, תהלים, ליכט, משניות, און פת שחרית פאר די מתפללי ותיקין.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* Layout: RTL; a stone-courtyard photo hero, then services, the daily sponsor sign, the gabbai, and contact on the card's brown band */
+:root{
+  --bg:#f7f1e8;          /* Meron limestone, light */
+  --surface:#fffaf2;
+  --ink:#2a1b10;
+  --muted:#6e5a48;
+  --brand:#6b3a17;       /* business-card brown */
+  --brand-ink:#fbf3e6;
+  --gold:#c48a52;        /* copper ring from the sponsor sign */
+  --line:#e3d4c0;
+  --display:"Frank Ruhl Libre","David Libre","Times New Roman",serif;
+  --body:"Assistant","Arial Hebrew",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1c140e;--surface:#271c14;--ink:#f3e8d9;--muted:#bfa98f;--brand:#7a4420;--brand-ink:#fbf3e6;--gold:#d9a26b;--line:#3d2d20;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c140e;--surface:#271c14;--ink:#f3e8d9;--muted:#bfa98f;--brand:#7a4420;--brand-ink:#fbf3e6;--gold:#d9a26b;--line:#3d2d20;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{direction:rtl}html[dir="ltr"]{direction:ltr}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65}
+.wrap{max-width:1080px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--brand)}
+:root[data-theme="dark"] h2{color:var(--gold)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h2{color:var(--gold)}}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+section{padding-block:clamp(48px,8vw,88px)}
+.eyebrow{font-weight:700;color:var(--gold);letter-spacing:.02em;font-size:1rem}
+.btn{display:inline-flex;align-items:center;gap:.5em;padding:.75em 1.4em;border-radius:999px;font-weight:700;text-decoration:none;font-family:var(--body);font-size:1.05rem;border:2px solid transparent;cursor:pointer}
+.btn-primary{background:var(--brand);color:var(--brand-ink)}
+.btn-ghost{border-color:currentColor;background:transparent}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--surface)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:56px;width:auto}
+.brand span{font-family:var(--display);font-weight:900;font-size:1.25rem;color:var(--brand);line-height:1.1}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:600}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+@media (max-width:760px){nav ul{display:none}.brand span{font-size:1.05rem}}
+
+/* hero */
+.hero{position:relative;color:#fff8ee;padding-block:0;overflow:hidden;background:#3b2414}
+.hero .photo{position:absolute;inset:0;background:url(images/meron-courtyard.jpg) center/cover;filter:sepia(.35)}
+.hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,10,.25) 0%,rgba(40,22,10,.55) 45%,rgba(40,22,10,.88) 100%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;padding-block:clamp(72px,14vw,150px) clamp(40px,6vw,64px)}
+.hero h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:900;color:#fff8ee}
+.hero h1 em{font-style:normal;color:#f0c08e}
+.hero p.lede{margin-top:16px;font-size:clamp(1.1rem,2.2vw,1.35rem);max-width:34em;color:#f3e6d6}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .btn-primary{background:#f0c08e;color:#3b2414}
+.hero .btn-ghost{color:#fff8ee}
+.badge{width:clamp(150px,20vw,230px);background:#f6ecdd;border-radius:46% 46% 18px 18px/34% 34% 18px 18px;padding:18px 14px 10px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-3deg)}
+.badge img{display:block;width:100%;height:auto}
+.stamp{display:inline-block;margin-bottom:14px;padding:4px 14px;border:1.5px solid #f0c08e;border-radius:999px;color:#f0c08e;font-weight:700}
+@media (max-width:640px){.hero .wrap{grid-template-columns:1fr}.badge{order:-1;width:140px}}
+
+/* services */
+.services .head{display:grid;gap:10px;max-width:40em}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:36px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.grid{grid-template-columns:1fr}}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:grid;gap:8px;align-content:start}
+.svc svg{width:38px;height:38px;color:var(--gold)}
+.svc h3{font-size:1.45rem;font-weight:700}
+.svc p{color:var(--muted);font-size:1rem}
+
+/* kvittel form */
+.kvittel{background:var(--surface);border-block:1px solid var(--line)}
+.kv{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start}
+@media (max-width:820px){.kv{grid-template-columns:1fr}}
+.kv .intro{display:grid;gap:14px}
+.kv .intro p{color:var(--muted)}
+form{display:grid;gap:14px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+label{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+input,select,textarea{font:inherit;padding:.6em .8em;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer}
+.chips input{width:auto}
+.note{font-size:.9rem;color:var(--muted)}
+
+/* sponsor */
+.sponsor .layout{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+@media (max-width:860px){.sponsor .layout{grid-template-columns:1fr}}
+.sign{position:relative;background:var(--surface);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;min-height:340px;border:1px solid var(--line)}
+.sign .arch{margin:22px;border:2px solid var(--gold);border-radius:999px 999px 16px 16px;padding:40px 18px 26px;text-align:center;display:grid;gap:10px;align-content:center}
+.sign .arch .t{font-family:var(--display);font-weight:900;font-size:clamp(2.2rem,5vw,3rem);line-height:1}
+.sign .arch .s{font-weight:600}
+.sign .arch .blank{border-bottom:1.5px dashed var(--muted);height:1.6em;margin-inline:12%}
+.sign .arch .b{font-size:.9rem;color:var(--muted)}
+.sign .pic{background:url(images/meron-tziyun.jpg) center/cover}
+@media (max-width:520px){.sign{grid-template-columns:1fr}.sign .pic{min-height:180px}}
+.opts{display:grid;gap:14px;margin-top:22px}
+.opt{display:flex;gap:14px;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.opt b{font-family:var(--display);font-size:1.35rem;min-width:5.5em;color:var(--brand)}
+.bracha{margin-top:22px;font-family:var(--display);font-size:1.1rem;line-height:1.7;color:var(--muted)}
+
+/* gabbai + contact on brand band */
+.band{background:var(--brand);color:var(--brand-ink)}
+.band h2{color:var(--brand-ink)!important}
+.contact{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.contact .who{display:grid;gap:6px}
+.contact .name{font-family:var(--display);font-weight:900;font-size:clamp(2rem,5vw,3rem);line-height:1.05}
+.contact .years{color:#f0c08e;font-weight:700}
+.lines{display:grid;gap:10px;font-size:1.15rem}
+.line{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.line .v{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;font-weight:700}
+.copy{font:inherit;font-size:.85rem;padding:3px 10px;border-radius:999px;border:1px solid rgba(251,243,230,.5);background:transparent;color:var(--brand-ink);cursor:pointer}
+.qrs{display:flex;gap:16px}
+.qr{background:#fff;border-radius:12px;padding:10px;display:grid;justify-items:center;gap:4px;color:#2a1b10;font-weight:700;font-size:.9rem}
+.qr img{width:118px;height:118px;image-rendering:pixelated}
+.band .btn-primary{background:#f0c08e;color:#3b2414}
+.langs{opacity:.85}
+
+footer{padding-block:28px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-1px)}}
+</style>
+<style>
+.langs-switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+.langs-switch button{font:inherit;font-weight:700;font-size:.9rem;padding:6px 12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.langs-switch button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+.top-actions{display:flex;align-items:center;gap:10px}
+html[lang="en"] body{font-size:1.02rem}
+html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
+@media (max-width:520px){.top-actions .btn{display:none}.brand img{height:46px}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Reb Shayele">
+      <img src="images/logo.png" alt="">
+      <span data-i="brand">רבי ישעי'לע<br>ביי רבי שמעון</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#services" data-i="nav1">שליחות</a></li>
+        <li><a href="#kvittel" data-i="nav2">קוויטל</a></li>
+        <li><a href="#sponsor" data-i="nav3">פרנס היום</a></li>
+        <li><a href="#contact" data-i="nav4">קאנטאקט</a></li>
+      </ul>
+    </nav>
+    <div class="top-actions">
+      <div class="langs-switch" role="group" aria-label="Language">
+        <button type="button" id="lang-yi" data-lang="yi" aria-pressed="true">אידיש</button>
+        <button type="button" id="lang-he" data-lang="he" aria-pressed="false">עברית</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">English</button>
+      </div>
+      <a class="btn btn-primary" href="https://wa.me/19293801124" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="photo" role="img" aria-label="Meron"></div>
+    <div class="wrap">
+      <div>
+        <span class="stamp" data-i="stamp">פערזענליכע שליח 24 שעה</span>
+        <h1 data-i="h1">דיין שליח צו <em>רבי שמעון'ס מערה</em> ביז 7 מינוט!</h1>
+        <p class="lede" data-i="lede">איר קענט שיקן א קוויטל, זאגן תהלים, צינדן ליכט, לערנען משניות, ווי אויך פת שחרית פאר די טעגליכע מתפללי ותיקין אין מירון.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#kvittel" data-i="cta1">שיקט א קוויטל</a>
+          <a class="btn btn-ghost" href="#sponsor" data-i="cta2">ווערט א פרנס היום</a>
+        </div>
+      </div>
+      <div class="badge"><img src="images/logo.png" alt="רבי ישעי'לע ביי רבי שמעון, יאכלו ענוים וישבעו"></div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-i="svcEy">וואס מיר טוען פאר אייך</span>
+        <h2 data-i="svcH">שליחות ביים ציון הקדוש</h2>
+        <p data-i="svcP">מרדכי שמעון חיימאוויטש איז אייער שליח אין מירון 24 שעה א טאג. שיקט אייער בקשה, און עס ווערט אפגעטון ביים ציון פון רבי שמעון בר יוחאי ביז 7 מינוט.</p>
+      </div>
+      <div class="grid">
+        <article class="svc">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 5h15l6 6v24H10z"/><path d="M25 5v6h6M15 18h11M15 23h11M15 28h7"/></svg>
+          <h3 data-i="s1h">קוויטל</h3>
+          <p data-i="s1p">שיקט די נעמען און די בקשה, און דער קוויטל ווערט געליינט ביים ציון.</p>
+        </article>
+        <article class="svc">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 9c-4-3-9-3-13-1v24c4-2 9-2 13 1 4-3 9-3 13-1V8c-4-2-9-2-13 1z"/><path d="M20 9v24"/></svg>
+          <h3 data-i="s2h">תהלים</h3>
+          <p data-i="s2p">תהלים זאגן לזכות אדער לרפואה פאר די וואס איר בעט.</p>
+        </article>
+        <article class="svc">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 4c3 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1-4 4-8z"/><rect x="15" y="17" width="10" height="16" rx="1"/><path d="M11 36h18"/></svg>
+          <h3 data-i="s3h">ליכט צינדן</h3>
+          <p data-i="s3p">א ליכט ווערט אנגעצונדן ביים ציון אויף אייער נאמען.</p>
+        </article>
+        <article class="svc">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 10h12a2 2 0 0 1 2 2v22a3 3 0 0 0-3-3H6zM34 10H22a2 2 0 0 0-2 2v22a3 3 0 0 1 3-3h11z"/></svg>
+          <h3 data-i="s4h">משניות</h3>
+          <p data-i="s4p">משניות לערנען לע״נ אדער לזכות, ביים ציון הקדוש.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="kvittel" id="kvittel">
+    <div class="wrap kv">
+      <div class="intro">
+        <span class="eyebrow" data-i="kvEy">קוויטל דורך WhatsApp</span>
+        <h2 data-i="kvH">שיקט א קוויטל</h2>
+        <p data-i="kvP1">פילט אויס דעם פארם. ווען איר דרוקט "שיקן" עפנט זיך WhatsApp מיט דער מעסעדזש גרייט צו שיקן צום גבאי.</p>
+        <p data-i="kvP2">מען רעדט אידיש, ענגליש און לשון הקודש.</p>
+      </div>
+      <form id="kvForm" novalidate>
+        <div class="row2">
+          <label for="kvName"><span data-i="lName">נאמען</span><input id="kvName" name="name" data-ph="phName" placeholder="למשל: יעקב"></label>
+          <label for="kvMother"><span data-i="lMother">בן / בת (מאמע'ס נאמען)</span><input id="kvMother" name="mother" data-ph="phMother" placeholder="למשל: שרה"></label>
+        </div>
+        <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
+          <legend style="font-weight:600;font-size:.95rem;margin-bottom:4px" data-i="lWhat">וואס זאל מען טון?</legend>
+          <div class="chips">
+            <label><input type="checkbox" id="kvS1" checked><span data-i="s1h">קוויטל</span></label>
+            <label><input type="checkbox" id="kvS2"><span data-i="s2h">תהלים</span></label>
+            <label><input type="checkbox" id="kvS3"><span data-i="s3h">ליכט צינדן</span></label>
+            <label><input type="checkbox" id="kvS4"><span data-i="s4h">משניות</span></label>
+          </div>
+        </fieldset>
+        <label for="kvReq"><span data-i="lReq">בקשה</span><textarea id="kvReq" name="req" data-ph="phReq" placeholder="למשל: רפואה שלימה, שידוך הגון, פרנסה בהרחבה"></textarea></label>
+        <a class="btn btn-primary" id="kvSend" href="https://wa.me/19293801124" target="_blank" rel="noopener" style="justify-content:center" data-i="kvBtn">שיקן דורך WhatsApp</a>
+        <p class="note" id="kvNote" data-i="kvNote">דער מעסעדזש גייט צו ‎+1 929-380-1124.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sponsor" id="sponsor">
+    <div class="wrap layout">
+      <div class="sign" dir="rtl">
+        <div class="arch">
+          <div class="t">פרנס היום</div>
+          <div class="s">הארוחת בוקר היום נתנדב<br>על ידי הרבני הנכבד</div>
+          <div class="blank"></div>
+          <div class="b">לזכות / לע״נ</div>
+        </div>
+        <div class="pic" role="img" aria-label="Meron"></div>
+      </div>
+      <div>
+        <span class="eyebrow">יאכלו ענוים וישבעו</span>
+        <h2 data-i="spH">פת שחרית פאר די מתפללי ותיקין</h2>
+        <p style="margin-top:12px" data-i="spP">יעדן אינדערפרי ווערט געגעבן פת שחרית פאר די וואס דאווענען ותיקין אין מירון. א פרנס היום'ס נאמען ווערט ארויפגעשטעלט אויפן שילד יענעם טאג, לזכות אדער לעילוי נשמת.</p>
+        <div class="opts">
+          <div class="opt"><b data-i="o1b">א טאג</b><span data-i="o1s">פרנס היום פאר איין אינדערפרי</span></div>
+          <div class="opt"><b data-i="o2b">א וואך</b><span data-i="o2s">פרנס פאר א גאנצע וואך</span></div>
+        </div>
+        <p class="bracha" dir="rtl">בשכר זה השם יתברך ישלם לו בכפלי כפליים, בזכות רבי ישעי בן רבי משה והתנא האלוקי רבי שמעון בר יוחאי, ויזכה בברכה והצלחה וכל מילי דמיטב ולקבל פני משיחנו בב״א.</p>
+        <div style="margin-top:22px"><a class="btn btn-primary" href="#contact" data-i="spBtn">ווערט א פרנס</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contact">
+    <div class="wrap contact">
+      <div class="who">
+        <span class="years" data-i="years">הגבאי, אייער שליח אין מירון 24 שעה</span>
+        <div class="name" data-i="name">מרדכי שמעון<br>חיימאוויטש</div>
+        <span class="langs" data-i="langs">אידיש · ענגליש · לשון הקודש</span>
+      </div>
+      <div class="lines">
+        <div class="line"><span data-i="lUS">WhatsApp:</span><span class="v" id="ph1">+1 929-380-1124</span><button class="copy" type="button" data-copy="ph1" data-i="copy">קאפירן</button></div>
+        <div class="line"><span data-i="lIL">טעלעפאן (רופן):</span><span class="v" id="ph2">+972 55-330-5308</span><button class="copy" type="button" data-copy="ph2" data-i="copy">קאפירן</button></div>
+        <div class="line"><span data-i="lEm">אימעיל:</span><span class="v" id="em">Mottychaimowitz@gmail.com</span><button class="copy" type="button" data-copy="em" data-i="copy">קאפירן</button></div>
+        <div style="margin-top:8px"><a class="btn btn-primary" href="https://wa.me/19293801124" target="_blank" rel="noopener" data-i="waBtn">שרייבט אויף WhatsApp</a></div>
+      </div>
+      <div class="qrs">
+        <div class="qr"><img src="images/qr-zelle.png" alt="Zelle QR">Zelle</div>
+        <div class="qr"><img src="images/qr-whatsapp.png" alt="WhatsApp QR">WhatsApp</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i="ft1">רבי ישעי'לע ביי רבי שמעון · מירון</span>
+    <span data-i="ft2">לאגא: Motty Media</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+var T={
+yi:{title:"רבי ישעי'לע ביי רבי שמעון",needName:"שרייבט ביטע א נאמען.",opened:'WhatsApp האט זיך געעפנט. דרוקט "Send" דארט.',msgHead:"קוויטל פאר רבי שמעון",benbas:"בן/בת",copied:"קאפירט"},
+he:{title:"רבי ישעי'לע ביי רבי שמעון",
+brand:"רבי ישעי'לע<br>ביי רבי שמעון",nav1:"שליחות",nav2:"קוויטל",nav3:"פרנס היום",nav4:"צור קשר",
+stamp:"שליח אישי 24 שעות",h1:"השליח שלכם <em>למערת רבי שמעון</em> תוך 7 דקות!",
+lede:"ניתן לשלוח קוויטל, לומר תהלים, להדליק נר, ללמוד משניות, וכן פת שחרית למתפללי הוותיקין היומיים במירון.",
+cta1:"שלחו קוויטל",cta2:"היו פרנס היום",
+svcEy:"מה אנחנו עושים עבורכם",svcH:"שליחות בציון הקדוש",
+svcP:"מרדכי שמעון חיימאוויטש משמש שליח במירון 24 שעות ביממה. שלחו את בקשתכם, והיא תתבצע בציון של רבי שמעון בר יוחאי תוך 7 דקות.",
+s1h:"קוויטל",s1p:"שלחו את השמות והבקשה, והקוויטל ייקרא בציון.",
+s2h:"תהלים",s2p:"אמירת תהלים לזכות או לרפואה עבור מי שתבקשו.",
+s3h:"הדלקת נר",s3p:"נר יודלק בציון על שמכם.",
+s4h:"משניות",s4p:"לימוד משניות לע״נ או לזכות, בציון הקדוש.",
+kvEy:"קוויטל בוואטסאפ",kvH:"שלחו קוויטל",
+kvP1:'מלאו את הטופס. כשתלחצו על "שליחה" ייפתח וואטסאפ עם ההודעה מוכנה לשליחה לגבאי.',
+kvP2:"הגבאי מדבר אידיש, אנגלית ולשון הקודש.",
+lName:"שם",lMother:"בן / בת (שם האם)",lWhat:"מה לעשות?",lReq:"בקשה",kvBtn:"שליחה בוואטסאפ",
+kvNote:"ההודעה תישלח אל ‎+1 929-380-1124.",
+phName:"לדוגמה: יעקב",phMother:"לדוגמה: שרה",phReq:"לדוגמה: רפואה שלמה, שידוך הגון, פרנסה בהרחבה",
+spH:"פת שחרית למתפללי הוותיקין",
+spP:"בכל בוקר מוגשת פת שחרית למתפללי הוותיקין במירון. שמו של פרנס היום מופיע על השלט באותו יום, לזכות או לעילוי נשמת.",
+o1b:"יום אחד",o1s:"פרנס היום לבוקר אחד",o2b:"שבוע",o2s:"פרנס לשבוע שלם",spBtn:"היו פרנס",
+years:"הגבאי, שליח במירון 24 שעות",name:"מרדכי שמעון<br>חיימאוויטש",langs:"אידיש · אנגלית · לשון הקודש",
+lUS:"וואטסאפ:",lIL:"טלפון (לשיחות):",lEm:"אימייל:",copy:"העתקה",waBtn:"כתבו בוואטסאפ",
+ft1:"רבי ישעי'לע ביי רבי שמעון · מירון",ft2:"לוגו: Motty Media",
+needName:"נא לכתוב שם.",opened:'וואטסאפ נפתח. לחצו שם על "Send".',msgHead:"קוויטל לרבי שמעון",benbas:"בן/בת",copied:"הועתק"},
+en:{title:"Reb Shayele at Reb Shimon",
+brand:"Reb Shayele<br>at Reb Shimon",nav1:"Services",nav2:"Kvittel",nav3:"Sponsor a day",nav4:"Contact",
+stamp:"Your personal shliach, 24 hours a day",h1:"Your shliach at <em>Rabbi Shimon's tziyun</em> within 7 minutes!",
+lede:"Send a kvittel, have Tehillim said, light a candle or learn Mishnayos. You can also sponsor breakfast for the daily vasikin minyan in Meron.",
+cta1:"Send a kvittel",cta2:"Sponsor a day",
+svcEy:"What we do for you",svcH:"At the holy tziyun",
+svcP:"Mordechai Shimon Chaimowitz is your shliach in Meron 24 hours a day. Send your request and it will be done at the tziyun of Rabbi Shimon bar Yochai within 7 minutes.",
+s1h:"Kvittel",s1p:"Send the names and your request, and the kvittel is read at the tziyun.",
+s2h:"Tehillim",s2p:"Tehillim said as a zechus or for a refuah, for whoever you ask.",
+s3h:"Light a candle",s3p:"A candle is lit at the tziyun in your name.",
+s4h:"Mishnayos",s4p:"Mishnayos learned l'iluy nishmas or as a zechus, at the holy tziyun.",
+kvEy:"Kvittel by WhatsApp",kvH:"Send a kvittel",
+kvP1:'Fill in the form. When you press "Send", WhatsApp opens with the message ready to send to the gabbai.',
+kvP2:"The gabbai speaks Yiddish, English and Hebrew.",
+lName:"Name",lMother:"Son / daughter of (mother's name)",lWhat:"What should be done?",lReq:"Request",kvBtn:"Send via WhatsApp",
+kvNote:"The message goes to +1 929-380-1124.",
+phName:"e.g. Yaakov",phMother:"e.g. Sarah",phReq:"e.g. refuah shleimah, a good shidduch, parnassah",
+spH:"Breakfast for the vasikin minyan",
+spP:"Every morning, breakfast is served to the people who daven vasikin in Meron. The day's sponsor is named on the sign that day, as a zechus or l'iluy nishmas.",
+o1b:"One day",o1s:"Sponsor one morning",o2b:"One week",o2s:"Sponsor a full week",spBtn:"Become a sponsor",
+years:"The gabbai, your shliach in Meron 24 hours a day",name:"Mordechai Shimon<br>(Motty) Chaimowitz",langs:"Yiddish · English · Hebrew",
+lUS:"WhatsApp:",lIL:"Phone (calls):",lEm:"Email:",copy:"Copy",waBtn:"Message on WhatsApp",
+ft1:"Reb Shayele at Reb Shimon · Meron",ft2:"Logo: Motty Media",
+needName:"Please enter a name.",opened:'WhatsApp opened. Press "Send" there.',msgHead:"Kvittel for Rabbi Shimon",benbas:"ben/bas",copied:"Copied"}
+};
+// capture the Yiddish originals from the page so switching back works
+document.querySelectorAll('[data-i]').forEach(function(el){var k=el.dataset.i;if(!(k in T.yi))T.yi[k]=el.innerHTML});
+document.querySelectorAll('[data-ph]').forEach(function(el){T.yi[el.dataset.ph]=el.placeholder});
+var cur='yi';
+function t(k){return (T[cur]&&T[cur][k]!=null)?T[cur][k]:T.yi[k]}
+function setLang(l){
+  if(!T[l])l='yi';cur=l;
+  var root=document.documentElement;root.lang=l;root.dir=(l==='en')?'ltr':'rtl';
+  document.querySelectorAll('[data-i]').forEach(function(el){el.innerHTML=t(el.dataset.i)});
+  document.querySelectorAll('[data-ph]').forEach(function(el){el.placeholder=t(el.dataset.ph)});
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+  document.title=t('title');
+  try{localStorage.setItem('rs-lang',l)}catch(e){}
+}
+document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});
+var saved='yi';try{saved=localStorage.getItem('rs-lang')||'yi'}catch(e){}
+setLang(saved);
+
+var form=document.getElementById('kvForm');
+var send=document.getElementById('kvSend');
+var WA='https://wa.me/19293801124?text=';
+function buildMsg(){
+  var n=document.getElementById('kvName').value.trim();
+  var m=document.getElementById('kvMother').value.trim();
+  var r=document.getElementById('kvReq').value.trim();
+  var s=[].slice.call(form.querySelectorAll('.chips input:checked')).map(function(x){return x.nextElementSibling.textContent}).join(', ');
+  return {n:n,msg:t('msgHead')+'\n'+n+(m?' '+t('benbas')+' '+m:'')+(s?'\n'+s:'')+(r?'\n'+r:'')};
+}
+function refresh(){send.href=WA+encodeURIComponent(buildMsg().msg);}
+form.addEventListener('input',refresh);form.addEventListener('change',refresh);
+document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',refresh)});
+refresh();
+send.addEventListener('click',function(e){
+  var note=document.getElementById('kvNote');
+  refresh();
+  if(!buildMsg().n){e.preventDefault();note.textContent=t('needName');document.getElementById('kvName').focus();return;}
+  note.textContent=t('opened');
+});
+form.addEventListener('submit',function(e){e.preventDefault();send.click();});
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.copy),txt=el.textContent;
+    function done(){b.textContent=t('copied');setTimeout(function(){b.textContent=t('copy')},1600)}
+    function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(txt).then(done,sel)}catch(err){sel()}
+  });
+});
+})();
+</script>
+</body>
+</html>
