@@ -108,7 +108,13 @@ textarea{min-height:90px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer}
 .chips input{width:auto}
+[hidden]{display:none!important}
 .note{font-size:.9rem;color:var(--muted)}
+.kvres{display:grid;gap:10px;justify-items:stretch;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.kvres-title{font-family:var(--display);font-size:1.4rem;color:var(--brand);text-align:center}
+.kvres img{width:min(240px,70%);justify-self:center;border-radius:6px;box-shadow:0 8px 24px rgba(60,30,10,.18)}
+.kvres .btn{justify-content:center}
+button.btn-ghost,a.btn-ghost{color:var(--brand)}
 
 /* sponsor */
 .sponsor .layout{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
@@ -240,26 +246,39 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
       <div class="intro">
         <span class="eyebrow" data-i="kvEy">קוויטל דורך WhatsApp</span>
         <h2 data-i="kvH">שיקט א קוויטל</h2>
-        <p data-i="kvP1">פילט אויס דעם פארם. ווען איר דרוקט "שיקן" עפנט זיך WhatsApp מיט דער מעסעדזש גרייט צו שיקן צום גבאי.</p>
+        <p data-i="kvP1">פילט אויס דעם פארם און דרוקט "מאכן דעם קוויטל". איר וועט זען דעם קוויטל ווי א PDF, און שיקן אים צום גבאי אויף WhatsApp.</p>
         <p data-i="kvP2">מען רעדט אידיש, ענגליש און לשון הקודש.</p>
       </div>
       <form id="kvForm" novalidate>
         <div class="row2">
           <label for="kvName"><span data-i="lName">נאמען</span><input id="kvName" name="name" data-ph="phName" placeholder="למשל: יעקב"></label>
-          <label for="kvMother"><span data-i="lMother">בן / בת (מאמע'ס נאמען)</span><input id="kvMother" name="mother" data-ph="phMother" placeholder="למשל: שרה"></label>
+          <label for="kvMother"><span data-i="lMother">מאמע'ס נאמען</span><input id="kvMother" name="mother" data-ph="phMother" placeholder="למשל: שרה"></label>
         </div>
+        <div class="chips" role="radiogroup" aria-label="בן / בת">
+          <label><input type="radio" name="kvGender" id="kvBen" value="ben" checked><span data-i="gBen">בן</span></label>
+          <label><input type="radio" name="kvGender" id="kvBas" value="bas"><span data-i="gBas">בת</span></label>
+        </div>
+        <label for="kvMore"><span data-i="lMore">נאך נעמען (נישט מוז)</span><textarea id="kvMore" name="more" rows="2" data-ph="phMore" placeholder="יעדער נאמען אויף א באזונדערע שורה, למשל: חנה בת לאה"></textarea></label>
         <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
           <legend style="font-weight:600;font-size:.95rem;margin-bottom:4px" data-i="lWhat">וואס זאל מען טון?</legend>
           <div class="chips">
-            <label><input type="checkbox" id="kvS1" checked><span data-i="s1h">קוויטל</span></label>
-            <label><input type="checkbox" id="kvS2"><span data-i="s2h">תהלים</span></label>
-            <label><input type="checkbox" id="kvS3"><span data-i="s3h">ליכט צינדן</span></label>
-            <label><input type="checkbox" id="kvS4"><span data-i="s4h">משניות</span></label>
+            <label><input type="checkbox" id="kvS1" value="kvittel" checked><span data-i="s1h">קוויטל</span></label>
+            <label><input type="checkbox" id="kvS2" value="tehillim"><span data-i="s2h">תהלים</span></label>
+            <label><input type="checkbox" id="kvS3" value="candle"><span data-i="s3h">ליכט צינדן</span></label>
+            <label><input type="checkbox" id="kvS4" value="mishnayos"><span data-i="s4h">משניות</span></label>
           </div>
         </fieldset>
         <label for="kvReq"><span data-i="lReq">בקשה</span><textarea id="kvReq" name="req" data-ph="phReq" placeholder="למשל: רפואה שלימה, שידוך הגון, פרנסה בהרחבה"></textarea></label>
-        <a class="btn btn-primary" id="kvSend" href="https://wa.me/19293801124" target="_blank" rel="noopener" style="justify-content:center" data-i="kvBtn">שיקן דורך WhatsApp</a>
-        <p class="note" id="kvNote" data-i="kvNote">דער מעסעדזש גייט צו ‎+1 929-380-1124.</p>
+        <button class="btn btn-primary" type="submit" id="kvMake" style="justify-content:center" data-i="kvBtn">מאכן דעם קוויטל</button>
+        <p class="note" id="kvNote" data-i="kvNote">מען מאכט א PDF קוויטל וואס איר שיקט צום גבאי אויף WhatsApp.</p>
+        <div class="kvres" id="kvResult" hidden>
+          <strong class="kvres-title" data-i="rTitle">דער קוויטל איז גרייט</strong>
+          <img id="kvPreview" alt="קוויטל PDF">
+          <button class="btn btn-primary" type="button" id="kvShare" hidden data-i="bShare">שיקן דעם PDF אויף WhatsApp</button>
+          <a class="btn btn-ghost" id="kvDownload" href="#" download="kvittel.pdf" data-i="bDownload">אראפלאדן דעם PDF</a>
+          <a class="btn btn-ghost" id="kvChat" href="https://wa.me/19293801124" target="_blank" rel="noopener" data-i="bChat">עפענען דעם גבאי'ס WhatsApp</a>
+          <p class="note" id="kvHow"></p>
+        </div>
       </form>
     </div>
   </section>
@@ -317,10 +336,12 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
   </div>
 </footer>
 
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="kvittel.js"></script>
 <script>
 (function(){
 var T={
-yi:{title:"רבי ישעי'לע ביי רבי שמעון",needName:"שרייבט ביטע א נאמען.",opened:'WhatsApp האט זיך געעפנט. דרוקט "Send" דארט.',msgHead:"קוויטל פאר רבי שמעון",benbas:"בן/בת",copied:"קאפירט"},
+yi:{title:"רבי ישעי'לע ביי רבי שמעון",needName:"שרייבט ביטע א נאמען.",opened:'WhatsApp האט זיך געעפנט. דרוקט "Send" דארט.',msgHead:"קוויטל פאר רבי שמעון",howShare:'וועלט אויס WhatsApp, און דערנאך דעם גבאי (⁦+1 929-380-1124⁩). אויב איר האט אים נישט, דרוקט "עפענען דעם גבאי\'ס WhatsApp" און צוטשעפעט דעם PDF.',howNoShare:"לאדט אראפ דעם PDF, עפנט דעם גבאי'ס WhatsApp, און צוטשעפעט דעם PDF צום מעסעדזש.",making:"מען מאכט דעם קוויטל…",failed:"עס איז נישט געלונגען צו מאכן דעם PDF. איר קענט שיקן דעם קוויטל אלס מעסעדזש אויפן גבאי'ס WhatsApp.",pdfNote:"(קוויטל PDF צוגעטשעפעט)",benbas:"בן/בת",copied:"קאפירט"},
 he:{title:"רבי ישעי'לע ביי רבי שמעון",
 brand:"רבי ישעי'לע<br>ביי רבי שמעון",nav1:"שליחות",nav2:"קוויטל",nav3:"פרנס היום",nav4:"צור קשר",
 stamp:"שליח אישי 24 שעות",h1:"השליח שלכם <em>למערת רבי שמעון</em> תוך 7 דקות!",
@@ -333,10 +354,14 @@ s2h:"תהלים",s2p:"אמירת תהלים לזכות או לרפואה עבו�
 s3h:"הדלקת נר",s3p:"נר יודלק בציון על שמכם.",
 s4h:"משניות",s4p:"לימוד משניות לע״נ או לזכות, בציון הקדוש.",
 kvEy:"קוויטל בוואטסאפ",kvH:"שלחו קוויטל",
-kvP1:'מלאו את הטופס. כשתלחצו על "שליחה" ייפתח וואטסאפ עם ההודעה מוכנה לשליחה לגבאי.',
+kvP1:'מלאו את הטופס ולחצו "הכנת הקוויטל". תראו את הקוויטל כקובץ PDF ותשלחו אותו לגבאי בוואטסאפ.',
 kvP2:"הגבאי מדבר אידיש, אנגלית ולשון הקודש.",
-lName:"שם",lMother:"בן / בת (שם האם)",lWhat:"מה לעשות?",lReq:"בקשה",kvBtn:"שליחה בוואטסאפ",
-kvNote:"ההודעה תישלח אל ‎+1 929-380-1124.",
+lName:"שם",lMother:"שם האם",gBen:"בן",gBas:"בת",lMore:"שמות נוספים (לא חובה)",phMore:"כל שם בשורה נפרדת, לדוגמה: חנה בת לאה",lWhat:"מה לעשות?",lReq:"בקשה",kvBtn:"הכנת הקוויטל",
+kvNote:"ייווצר קוויטל PDF שתשלחו לגבאי בוואטסאפ.",
+rTitle:"הקוויטל מוכן",bShare:"שליחת ה-PDF בוואטסאפ",bDownload:"הורדת ה-PDF",bChat:"פתיחת הוואטסאפ של הגבאי",
+howShare:'בחרו בוואטסאפ ואז בגבאי (⁦+1 929-380-1124⁩). אם הוא לא שמור אצלכם, לחצו "פתיחת הוואטסאפ של הגבאי" וצרפו את ה-PDF.',
+howNoShare:"הורידו את ה-PDF, פתחו את הוואטסאפ של הגבאי וצרפו את ה-PDF להודעה.",
+making:"מכין את הקוויטל…",failed:"לא הצלחנו להכין את ה-PDF. אפשר לשלוח את הקוויטל כהודעה בוואטסאפ של הגבאי.",pdfNote:"(קוויטל PDF מצורף)",
 phName:"לדוגמה: יעקב",phMother:"לדוגמה: שרה",phReq:"לדוגמה: רפואה שלמה, שידוך הגון, פרנסה בהרחבה",
 spH:"פת שחרית למתפללי הוותיקין",
 spP:"בכל בוקר מוגשת פת שחרית למתפללי הוותיקין במירון. שמו של פרנס היום מופיע על השלט באותו יום, לזכות או לעילוי נשמת.",
@@ -357,10 +382,14 @@ s2h:"Tehillim",s2p:"Tehillim said as a zechus or for a refuah, for whoever you a
 s3h:"Light a candle",s3p:"A candle is lit at the tziyun in your name.",
 s4h:"Mishnayos",s4p:"Mishnayos learned l'iluy nishmas or as a zechus, at the holy tziyun.",
 kvEy:"Kvittel by WhatsApp",kvH:"Send a kvittel",
-kvP1:'Fill in the form. When you press "Send", WhatsApp opens with the message ready to send to the gabbai.',
+kvP1:'Fill in the form and press "Make the kvittel". You\'ll see it as a PDF and send it to the gabbai on WhatsApp.',
 kvP2:"The gabbai speaks Yiddish, English and Hebrew.",
-lName:"Name",lMother:"Son / daughter of (mother's name)",lWhat:"What should be done?",lReq:"Request",kvBtn:"Send via WhatsApp",
-kvNote:"The message goes to +1 929-380-1124.",
+lName:"Name",lMother:"Mother's name",gBen:"son of",gBas:"daughter of",lMore:"More names (optional)",phMore:"One name per line, e.g. Chana bas Leah",lWhat:"What should be done?",lReq:"Request",kvBtn:"Make the kvittel",
+kvNote:"This makes a PDF kvittel that you send to the gabbai on WhatsApp.",
+rTitle:"Your kvittel is ready",bShare:"Send the PDF on WhatsApp",bDownload:"Download the PDF",bChat:"Open the gabbai's WhatsApp",
+howShare:'Choose WhatsApp, then the gabbai (+1 929-380-1124). If he isn\'t in your contacts, press "Open the gabbai\'s WhatsApp" and attach the PDF.',
+howNoShare:"Download the PDF, open the gabbai's WhatsApp, and attach the PDF to the message.",
+making:"Making the kvittel…",failed:"The PDF couldn't be made. You can still send the kvittel as a message on the gabbai's WhatsApp.",pdfNote:"(kvittel PDF attached)",
 phName:"e.g. Yaakov",phMother:"e.g. Sarah",phReq:"e.g. refuah shleimah, a good shidduch, parnassah",
 spH:"Breakfast for the vasikin minyan",
 spP:"Every morning, breakfast is served to the people who daven vasikin in Meron. The day's sponsor is named on the sign that day, as a zechus or l'iluy nishmas.",
@@ -389,26 +418,52 @@ var saved='yi';try{saved=localStorage.getItem('rs-lang')||'yi'}catch(e){}
 setLang(saved);
 
 var form=document.getElementById('kvForm');
-var send=document.getElementById('kvSend');
 var WA='https://wa.me/19293801124?text=';
-function buildMsg(){
-  var n=document.getElementById('kvName').value.trim();
-  var m=document.getElementById('kvMother').value.trim();
-  var r=document.getElementById('kvReq').value.trim();
-  var s=[].slice.call(form.querySelectorAll('.chips input:checked')).map(function(x){return x.nextElementSibling.textContent}).join(', ');
-  return {n:n,msg:t('msgHead')+'\n'+n+(m?' '+t('benbas')+' '+m:'')+(s?'\n'+s:'')+(r?'\n'+r:'')};
+var res=document.getElementById('kvResult'),note=document.getElementById('kvNote'),how=document.getElementById('kvHow');
+var shareBtn=document.getElementById('kvShare'),dl=document.getElementById('kvDownload'),chat=document.getElementById('kvChat');
+var current=null,blobUrl=null;
+function val(id){return document.getElementById(id).value.trim()}
+function readForm(){
+  var g=(form.querySelector('input[name="kvGender"]:checked')||{}).value||'ben';
+  var svc=[].slice.call(form.querySelectorAll('.chips input[type="checkbox"]:checked'));
+  return {name:val('kvName'),gender:g,mother:val('kvMother'),more:val('kvMore'),req:val('kvReq'),
+    services:svc.map(function(x){return x.value}),serviceNames:svc.map(function(x){return x.nextElementSibling.textContent})};
 }
-function refresh(){send.href=WA+encodeURIComponent(buildMsg().msg);}
-form.addEventListener('input',refresh);form.addEventListener('change',refresh);
-document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',refresh)});
-refresh();
-send.addEventListener('click',function(e){
-  var note=document.getElementById('kvNote');
-  refresh();
-  if(!buildMsg().n){e.preventDefault();note.textContent=t('needName');document.getElementById('kvName').focus();return;}
-  note.textContent=t('opened');
+function buildMsg(d){
+  var bb=d.gender==='bas'?'בת':'בן';
+  return t('msgHead')+'\n'+d.name+(d.mother?' '+bb+' '+d.mother:'')+(d.more?'\n'+d.more:'')+(d.serviceNames.length?'\n'+d.serviceNames.join(', '):'')+(d.req?'\n'+d.req:'');
+}
+function canShareFiles(file){try{return !!(navigator.canShare&&navigator.share&&navigator.canShare({files:[file]}))}catch(e){return false}}
+function setHow(){if(!current)return;how.textContent=t(current.file&&canShareFiles(current.file)?'howShare':'howNoShare')}
+form.addEventListener('input',function(){if(!res.hidden){res.hidden=true;current=null;note.textContent=t('kvNote')}});
+document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setHow();if(current){chat.href=WA+encodeURIComponent(buildMsg(current.data)+'\n'+t('pdfNote'))}})});
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var d=readForm();
+  if(!d.name){note.textContent=t('needName');document.getElementById('kvName').focus();return;}
+  note.textContent=t('making');
+  chat.href=WA+encodeURIComponent(buildMsg(d)+'\n'+t('pdfNote'));
+  Kvittel.render(d).then(function(canvas){
+    var blob=Kvittel.toPdf(canvas),name=Kvittel.fileName(d);
+    var file=null;try{file=new File([blob],name,{type:'application/pdf'})}catch(err){}
+    if(blobUrl)URL.revokeObjectURL(blobUrl);
+    blobUrl=URL.createObjectURL(blob);
+    dl.href=blobUrl;dl.setAttribute('download',name);
+    document.getElementById('kvPreview').src=canvas.toDataURL('image/jpeg',0.7);
+    current={data:d,file:file,blob:blob};
+    shareBtn.hidden=!(file&&canShareFiles(file));
+    setHow();res.hidden=false;note.textContent='';
+    res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }).catch(function(){
+    chat.href=WA+encodeURIComponent(buildMsg(d));
+    current=null;shareBtn.hidden=true;dl.hidden=true;res.hidden=false;how.textContent='';
+    note.textContent=t('failed');
+  });
 });
-form.addEventListener('submit',function(e){e.preventDefault();send.click();});
+shareBtn.addEventListener('click',function(){
+  if(!current||!current.file)return;
+  navigator.share({files:[current.file],title:t('msgHead'),text:buildMsg(current.data)}).catch(function(){});
+});
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){
     var el=document.getElementById(b.dataset.copy),txt=el.textContent;
