@@ -1,4 +1,4 @@
-/* Kvittel (פדיון נפש) renderer: draws the kvittel on a canvas and turns it into an A5 PDF.
+/* Kvittel renderer: draws the kvittel on a canvas and turns it into an A5 PDF.
    Used by the website form and for the printable blank kvittel. Needs vendor/jspdf.umd.min.js. */
 (function () {
   var W = 1240, H = 1754; // A5 at ~213 dpi
@@ -19,7 +19,7 @@
         var img = new Image();
         img.onload = function () { resolve(img); };
         img.onerror = function () { resolve(null); };
-        img.src = src || 'images/logo.png';
+        img.src = src || 'images/logo-kvittel.png';
       });
     }
     return logoPromise;
@@ -69,7 +69,8 @@
     return dd + '.' + mm + '.' + d.getFullYear();
   }
 
-  // data: {name, gender:'ben'|'bas', mother, more, req, services:[ids]} — empty data draws a blank kvittel to fill in by hand.
+  // data: {name, gender:'ben'|'bas', mother, more, req, from, services:[ids]} — empty data draws a blank kvittel to fill in by hand.
+  // Style: arch + logo, big "קוויטל" on top, the sender's name at the bottom above the gabbai line.
   function draw(canvas, data, logo) {
     data = data || {};
     var blank = !data.name;
@@ -77,99 +78,64 @@
     var ctx = canvas.getContext('2d');
     ctx.direction = 'rtl'; ctx.textBaseline = 'alphabetic';
 
-    // paper + frame
     ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = C.copper; ctx.lineWidth = 4; ctx.strokeRect(38, 38, W - 76, H - 76);
     ctx.strokeStyle = C.brown; ctx.lineWidth = 1.5; ctx.strokeRect(54, 54, W - 108, H - 108);
 
-    // arch, echoing the logo and the sponsor sign
-    var ax1 = 130, ax2 = W - 130, r = (ax2 - ax1) / 2, cy = 120 + r, bottom = 1530;
+    var ax1 = 110, ax2 = W - 110, r = (ax2 - ax1) / 2, cy = 110 + r, bottom = 1610;
     ctx.save(); ctx.strokeStyle = C.copper; ctx.lineWidth = 3;
     ctx.beginPath(); ctx.moveTo(ax1, bottom); ctx.lineTo(ax1, cy); ctx.arc(W / 2, cy, r, Math.PI, 0); ctx.lineTo(ax2, bottom); ctx.stroke(); ctx.restore();
 
-    // logo
-    if (logo) {
-      var lh = 330, lw = lh * logo.width / logo.height;
-      ctx.drawImage(logo, (W - lw) / 2, 150, lw, lh);
-    }
+    if (logo) { var lh = 220, lw = lh * logo.width / logo.height; ctx.drawImage(logo, (W - lw) / 2, 125, lw, lh); }
 
-    var y = 590;
-    ctx.textAlign = 'center'; ctx.fillStyle = C.brown; font(ctx, 900, 92);
-    ctx.fillText('פדיון נפש', W / 2, y);
-    y += 58; ctx.fillStyle = C.muted; font(ctx, 500, 34);
-    ctx.fillText('לציון התנא האלוקי רבי שמעון בר יוחאי זי״ע · מירון', W / 2, y);
-    y += 46; ornament(ctx, y);
+    ctx.textAlign = 'center'; ctx.fillStyle = C.brown; font(ctx, 900, 96);
+    ctx.fillText('קוויטל', W / 2, 445);
+    ctx.fillStyle = C.muted; font(ctx, 500, 32);
+    ctx.fillText('לציון התנא האלוקי רבי שמעון בר יוחאי זי״ע · מירון', W / 2, 497);
+    ornament(ctx, 532);
 
-    var x1 = ax1 + 70, x2 = ax2 - 70, maxW = x2 - x1;
+    var x1 = ax1 + 60, x2 = ax2 - 60, maxW = x2 - x1, y = 532;
 
-    // main name
-    y += 108;
     if (blank) {
-      dashed(ctx, x1, x2, y);
+      y += 110; dashed(ctx, x1, x2, y);
       font(ctx, 400, 26, BODY); ctx.fillStyle = C.muted; ctx.fillText('שם  ·  בן / בת  ·  שם האם', W / 2, y + 40);
-      y += 40;
+      for (var i = 0; i < 3; i++) { y += 90; dashed(ctx, x1, x2, y); }
+      y += 70; label(ctx, 'בקשה', y);
+      for (var j = 0; j < 4; j++) { y += 80; dashed(ctx, x1, x2, y); }
     } else {
       var who = data.name.trim() + (data.mother ? ' ' + (data.gender === 'bas' ? 'בת' : 'בן') + ' ' + data.mother.trim() : '');
-      var size = 72; font(ctx, 900, size);
-      while (ctx.measureText(who).width > maxW && size > 40) { size -= 4; font(ctx, 900, size); }
-      ctx.fillStyle = C.ink; ctx.fillText(who, W / 2, y);
+      var more = String(data.more || '').split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
+      var req = String(data.req || '').trim();
+      var sel = data.services || [];
+      var svc = SERVICES.filter(function (s) { return sel.indexOf(s.id) >= 0; }).map(function (s) { return s.he; }).join(' · ');
+      // shrink everything together until it fits under the arch
+      var k = 1, lines, layout;
+      for (; k > 0.5; k -= 0.05) {
+        var sMain = Math.round(64 * k), sMore = Math.round(46 * k), sReq = Math.round(42 * k), gap = Math.round(60 * k);
+        layout = { main: [], more: [], req: [] };
+        font(ctx, 900, sMain); layout.main = wrap(ctx, who, maxW);
+        font(ctx, 700, sMore); more.forEach(function (n) { layout.more = layout.more.concat(wrap(ctx, n, maxW)); });
+        font(ctx, 700, sReq); layout.req = req ? wrap(ctx, req, maxW) : [];
+        var hgt = 110 + layout.main.length * sMain * 1.25 + (layout.more.length ? gap + layout.more.length * sMore * 1.3 : 0) +
+          (layout.req.length ? gap + layout.req.length * sReq * 1.35 : 0) + (svc ? gap + 40 : 0);
+        if (532 + hgt < 1590) break;
+      }
+      y += Math.round(30 * k);
+      ctx.fillStyle = C.ink;
+      font(ctx, 900, sMain); layout.main.forEach(function (l) { y += Math.round(sMain * 1.25); ctx.fillText(l, W / 2, y); });
+      if (layout.more.length) { y += gap - Math.round(sMore * 0.3); font(ctx, 700, sMore); layout.more.forEach(function (l) { y += Math.round(sMore * 1.3); ctx.fillText(l, W / 2, y); }); }
+      if (layout.req.length) { y += gap - Math.round(sReq * 0.35); ctx.fillStyle = C.brown; font(ctx, 700, sReq); layout.req.forEach(function (l) { y += Math.round(sReq * 1.35); ctx.fillText(l, W / 2, y); }); }
+      if (svc) { y += gap; ornament(ctx, y - 20); font(ctx, 600, Math.round(34 * Math.max(k, 0.8)), BODY); ctx.fillStyle = C.muted; ctx.fillText(svc, W / 2, y + 30); }
     }
 
-    // more names
-    var more = blank ? [] : String(data.more || '').split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
-    if (blank || more.length) {
-      y += 78; label(ctx, 'ועוד', y);
-      if (blank) {
-        for (var i = 0; i < 2; i++) { y += 62; dashed(ctx, x1, x2, y); }
-      } else {
-        font(ctx, 700, 44); ctx.fillStyle = C.ink;
-        var mLines = [];
-        more.forEach(function (n) { mLines = mLines.concat(wrap(ctx, n, maxW)); });
-        mLines.slice(0, 6).forEach(function (l) { y += 58; ctx.fillText(l, W / 2, y); });
-      }
+    // sender, then the gabbai line
+    var from = blank ? '' : String(data.from || '').trim();
+    if (from) {
+      var fs = 34; font(ctx, 700, fs, BODY); while (ctx.measureText(from).width > 900 && fs > 22) { fs -= 2; font(ctx, 700, fs, BODY); }
+      ctx.fillStyle = C.brown; ctx.direction = /[֐-׿]/.test(from) ? 'rtl' : 'ltr'; ctx.fillText(from, W / 2, 1645); ctx.direction = 'rtl';
     }
-
-    // request
-    var req = blank ? '' : String(data.req || '').trim();
-    if (blank || req) {
-      y += 80; label(ctx, 'בקשה', y);
-      if (blank) {
-        for (var j = 0; j < 3; j++) { y += 62; dashed(ctx, x1, x2, y); }
-      } else {
-        font(ctx, 500, 44); ctx.fillStyle = C.ink;
-        var rLines = wrap(ctx, req, maxW), rSize = 44;
-        while (rLines.length > 5 && rSize > 30) { rSize -= 4; font(ctx, 500, rSize); rLines = wrap(ctx, req, maxW); }
-        rLines.slice(0, 7).forEach(function (l) { y += rSize + 16; ctx.fillText(l, W / 2, y); });
-      }
-    }
-
-    // services: 2x2 grid of check boxes, kept above the arch's base
-    var sy = Math.min(Math.max(y + 90, 1290), 1420);
-    var sel = data.services || [];
-    font(ctx, 600, 34, BODY);
-    var colX = [W / 2 + 250, W / 2 - 110];
-    SERVICES.forEach(function (s, k) {
-      var cx = colX[k % 2], yy = sy + Math.floor(k / 2) * 66;
-      var box = 30, bx = cx - box; // box on the right of the label (RTL)
-      ctx.strokeStyle = C.brown; ctx.lineWidth = 2.5; ctx.strokeRect(bx, yy - box + 4, box, box);
-      if (!blank && sel.indexOf(s.id) >= 0) {
-        ctx.strokeStyle = C.brown; ctx.lineWidth = 5; ctx.beginPath();
-        ctx.moveTo(bx + 6, yy - 10); ctx.lineTo(bx + 13, yy - 2); ctx.lineTo(bx + 26, yy - 22); ctx.stroke();
-      }
-      ctx.fillStyle = C.ink; ctx.textAlign = 'right'; ctx.fillText(s.he, bx - 14, yy);
-    });
-    ctx.textAlign = 'center';
-
-    // footer under the arch
-    ctx.fillStyle = C.brown; font(ctx, 700, 40);
-    ctx.fillText('יאכלו ענוים וישבעו', W / 2, 1600);
     font(ctx, 400, 25, BODY); ctx.fillStyle = C.muted;
-    ctx.fillText('רבי ישעי\'לע ביי רבי שמעון · הגבאי מרדכי שמעון חיימאוויטש · WhatsApp ‎+1 929-380-1124', W / 2, 1650);
-    if (!blank) {
-      ctx.fillText('rebshimon.github.io · ' + fmtDate(new Date()), W / 2, 1688);
-    } else {
-      ctx.fillText('rebshimon.github.io', W / 2, 1688);
-    }
+    ctx.fillText('רבי ישעי\'לע ביי רבי שמעון · הגבאי מרדכי שמעון חיימאוויטש · WhatsApp ⁦+1 929-380-1124⁩', W / 2, 1680);
     return canvas;
   }
 
@@ -186,7 +152,7 @@
     if (!JsPDF) throw new Error('PDF library did not load');
     var doc = new JsPDF({ unit: 'mm', format: 'a5', orientation: 'portrait', compress: true });
     doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 148, 210);
-    doc.setProperties({ title: 'קוויטל · פדיון נפש', subject: 'Kvittel for the tziyun of Rabbi Shimon bar Yochai, Meron', creator: 'rebshimon.github.io' });
+    doc.setProperties({ title: 'קוויטל', subject: 'Kvittel for the tziyun of Rabbi Shimon bar Yochai, Meron', creator: 'rebshimon.github.io' });
     return doc.output('blob');
   }
 
