@@ -97,11 +97,7 @@
     var x1 = ax1 + 60, x2 = ax2 - 60, maxW = x2 - x1, y = 532;
 
     if (blank) {
-      y += 110; dashed(ctx, x1, x2, y);
-      font(ctx, 400, 26, BODY); ctx.fillStyle = C.muted; ctx.fillText('שם  ·  בן / בת  ·  שם האם', W / 2, y + 40);
-      for (var i = 0; i < 3; i++) { y += 90; dashed(ctx, x1, x2, y); }
-      y += 70; label(ctx, 'בקשה', y);
-      for (var j = 0; j < 4; j++) { y += 80; dashed(ctx, x1, x2, y); }
+      // blank kvittel: just the header, arch and gabbai line, room to write
     } else {
       var who = data.name.trim() + (data.mother ? ' ' + (data.gender === 'bas' ? 'בת' : 'בן') + ' ' + data.mother.trim() : '');
       var more = String(data.more || '').split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
