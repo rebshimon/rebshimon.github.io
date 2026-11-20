@@ -111,6 +111,13 @@ textarea{min-height:90px;resize:vertical}
 .chips input{width:auto}
 [hidden]{display:none!important}
 .note{font-size:.9rem;color:var(--muted)}
+.cards{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;direction:ltr;justify-content:flex-start}
+.cd{display:inline-flex;align-items:center;justify-content:center;height:26px;min-width:44px;padding:0 8px;border-radius:5px;background:#fff;color:#1a1f71;font:800 12px/1 system-ui,Arial,sans-serif;letter-spacing:.02em;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.cd.visa{font-style:italic;font-size:14px}
+.cd.mc i{width:16px;height:16px;border-radius:50%;background:#eb001b;display:block}.cd.mc i+i{background:#f79e1b;margin-left:-6px;mix-blend-mode:multiply}
+.cd.amex{background:#2e77bc;color:#fff}
+.cd.disc{color:#231f20}.cd.disc::after{content:"";width:8px;height:8px;border-radius:50%;background:#f58220;margin-left:3px}
+.cd.chr{color:#5a3412;font-weight:700}
 .paynote{font-size:.9rem;opacity:.85;margin-top:8px;max-width:34em}
 .total{font-size:1.2rem;font-weight:700}.total b{color:var(--gold);font-size:1.4rem}
 .svc .orderlink{color:var(--brand);font-weight:700;font-size:.95rem;text-decoration:none;margin-top:4px}
@@ -373,6 +380,15 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
         <div class="line"><span data-i="lIL">טעלעפאן (רופן):</span><span class="v" id="ph2">+972 55-330-5308</span><button class="copy" type="button" data-copy="ph2" data-i="copy">קאפירן</button></div>
         <div class="line"><span data-i="lEm">אימעיל:</span><span class="v" id="em">Mottychaimowitz@gmail.com</span><button class="copy" type="button" data-copy="em" data-i="copy">קאפירן</button></div>
         <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="https://wa.me/19293801124" target="_blank" rel="noopener" data-i="waBtn">שרייבט אויף WhatsApp</a><a class="btn btn-primary" href="https://secure.cardknox.com/vyazreim18" target="_blank" rel="noopener" data-i="payBtn">באצאלן אנליין</a></div>
+        <div class="cards" aria-label="Visa, Mastercard, American Express, Discover, Donors Fund, OJC, Matbia">
+          <span class="cd visa">VISA</span>
+          <span class="cd mc"><i></i><i></i></span>
+          <span class="cd amex">AMEX</span>
+          <span class="cd disc">DISCOVER</span>
+          <span class="cd chr">Donors Fund</span>
+          <span class="cd chr">OJC</span>
+          <span class="cd chr">Matbia</span>
+        </div>
         <p class="paynote" data-i="payNote">קרעדיט קארטל, Donors Fund, OJC, Matbia. שרייבט אין די נאטיץ פאר וואס עס איז, אדער שיקט דעם גבאי א WhatsApp.</p>
       </div>
       <div class="qrs">
@@ -474,7 +490,7 @@ setLang(saved);
 
 
 // email copy of every request to the gabbai (FormSubmit; first use sends him a one-time confirm email)
-function mailGabbai(subject,text){try{fetch('https://formsubmit.co/ajax/mottychaimowitz@gmail.com',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:subject,_template:'box',_captcha:'false',message:text})}).catch(function(){})}catch(e){}}
+function mailGabbai(subject,text){try{fetch('https://formsubmit.co/ajax/mottychaimowitz@gmail.com',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_cc:'mendlowitzdavid1@gmail.com',_subject:subject,_template:'box',_captcha:'false',message:text})}).catch(function(){})}catch(e){}}
 // order form
 (function(){
   var f=document.getElementById('orForm');if(!f)return;
