@@ -288,15 +288,22 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
         <label for="kvFrom"><span data-i="lFrom">אייער נאמען (דער וואס שיקט, נישט נויטיג)</span><input id="kvFrom" name="from" data-ph="phFrom" placeholder="למשל: משה גרינבערג"></label>
         <label for="kvMore"><span data-i="lMore">נאך נעמען (נישט נויטיג)</span><textarea id="kvMore" name="more" rows="2" data-ph="phMore" placeholder="יעדער נאמען אויף א באזונדערע שורה, למשל: חנה בת לאה"></textarea></label>
         <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
-          <legend style="font-weight:600;font-size:.95rem;margin-bottom:4px" data-i="lWhat">וואס זאל מען טון?</legend>
+          <legend style="font-weight:600;font-size:.95rem;margin-bottom:4px" data-i="lPlan">קוויטל</legend>
+          <div class="chips" role="radiogroup">
+            <label><input type="radio" name="kvPlan" value="once" data-p="26" checked><span data-i="kp1">איינמאל · $26</span></label>
+            <label><input type="radio" name="kvPlan" value="month" data-p="30"><span data-i="kp2">א חודש, יעדן טאג · $30</span></label>
+          </div>
+        </fieldset>
+        <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
+          <legend style="font-weight:600;font-size:.95rem;margin-bottom:4px" data-i="lWhat">צולייגן (נישט נויטיג)</legend>
           <div class="chips">
-            <label><input type="checkbox" id="kvS1" value="kvittel" checked><span data-i="s1h">קוויטל</span></label>
-            <label><input type="checkbox" id="kvS2" value="tehillim"><span data-i="s2h">תהלים</span></label>
-            <label><input type="checkbox" id="kvS3" value="candle"><span data-i="s3h">ליכט צינדן</span></label>
-            <label><input type="checkbox" id="kvS4" value="mishnayos"><span data-i="s4h">משניות</span></label>
+            <label><input type="checkbox" id="kvS2" value="tehillim" data-p="350"><span data-i="kx2">א גאנץ ספר תהלים · $350</span></label>
+            <label><input type="checkbox" id="kvS3" value="candle" data-p="36"><span data-i="kx3">ליכט צינדן · $36</span></label>
+            <label><input type="checkbox" id="kvS4" value="mishnayos" data-p="72"><span data-i="kx4">ליכט מיט משניות · $72</span></label>
           </div>
         </fieldset>
         <label for="kvReq"><span data-i="lReq">בקשה</span><textarea id="kvReq" name="req" data-ph="phReq" placeholder="למשל: רפואה שלימה, שידוך הגון, פרנסה בהרחבה"></textarea></label>
+        <p class="total"><span data-i="orTot">סך הכל:</span> <b id="kvTotal">$26</b></p>
         <button class="btn btn-primary" type="submit" id="kvMake" style="justify-content:center" data-i="kvBtn">מאכן דעם קוויטל</button>
         <p class="note" id="kvNote" data-i="kvNote">מען מאכט א PDF קוויטל וואס איר שיקט צום גבאי אויף WhatsApp.</p>
         <div class="kvres" id="kvResult" hidden>
@@ -412,7 +419,7 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
 (function(){
 var T={
 yi:{orHead:"בקשה פונעם וועבזייטל",orNeed:"שרייבט ביטע כאטש איין נאמען.",orSent:"WhatsApp האט זיך געעפנט. דרוקט \"Send\" דארט.",title:"רבי ישעי'לע ביי רבי שמעון",lFrom:"אייער נאמען (דער וואס שיקט, נישט נויטיג)",phFrom:"למשל: משה גרינבערג",needName:"שרייבט ביטע א נאמען.",opened:'WhatsApp האט זיך געעפנט. דרוקט "Send" דארט.',msgHead:"קוויטל פאר רבי שמעון",howShare:'וועלט אויס WhatsApp, און דערנאך דעם גבאי (⁦+1 929-380-1124⁩). אויב איר האט אים נישט, דרוקט "עפענען דעם גבאי\'ס WhatsApp" און צוטשעפעט דעם PDF.',howNoShare:"לאדט אראפ דעם PDF, עפנט דעם גבאי'ס WhatsApp, און צוטשעפעט דעם PDF צום מעסעדזש.",making:"מען מאכט דעם קוויטל…",failed:"עס איז נישט געלונגען צו מאכן דעם PDF. איר קענט שיקן דעם קוויטל אלס מעסעדזש אויפן גבאי'ס WhatsApp.",pdfNote:"(קוויטל PDF צוגעטשעפעט)",benbas:"בן/בת",copied:"קאפירט"},
-he:{lOrReq:"על מה להתפלל / עוד משהו (לא חובה)",nav5:"בקשה",orEy:"דרך וואטסאפ",orH:"שלחו בקשה",orP:"בחרו מה תרצו, כתבו את השמות ולחצו \"שליחה\". הבקשה עוברת ישר לגבאי בוואטסאפ, והוא יחזור אליכם.",orPay:"תשלום אונליין (אשראי, Donors Fund, OJC, Matbia) או בזל (למטה ב\"צור קשר\").",payBtn:"תשלום אונליין",payNote:"כרטיס אשראי, Donors Fund, OJC, Matbia. כתבו בהערה עבור מה התשלום, או שלחו לגבאי וואטסאפ.",lSvc:"מה תרצו?",ok1:"קוויטל פעם אחת · $26",ok2:"קוויטל לחודש, כל יום · $30",oth:"ספר תהלים שלם · $350",oc:"הדלקת נר · $36",ocm:"נר עם משניות · $72",och:"חלות לשבת · $3 לחלה",opd:"פרנס היום, יום אחד · $1,000",opw:"פרנס היום, שבוע · $5,000",lQty:"כמה חלות?",lDate:"לאיזה יום?",lNames:"שמות (לזכות / לעילוי נשמת)",phNames:"לדוגמה: יעקב בן שרה",lYou:"השם שלכם",orTot:"סך הכל:",orBtn:"שליחת הבקשה בוואטסאפ",orLink:"לשליחת בקשה ←",orHead:"בקשה מהאתר",orNeed:"נא לכתוב לפחות שם אחד.",orSent:"וואטסאפ נפתח. לחצו שם על \"Send\".",title:"רבי ישעי'לע ביי רבי שמעון",
+he:{lPlan:"קוויטל",kp1:"פעם אחת · $26",kp2:"חודש, כל יום · $30",lWhat:"להוסיף (לא חובה)",kx2:"ספר תהלים שלם · $350",kx3:"הדלקת נר · $36",kx4:"נר עם משניות · $72",lOrReq:"על מה להתפלל / עוד משהו (לא חובה)",nav5:"בקשה",orEy:"דרך וואטסאפ",orH:"שלחו בקשה",orP:"בחרו מה תרצו, כתבו את השמות ולחצו \"שליחה\". הבקשה עוברת ישר לגבאי בוואטסאפ, והוא יחזור אליכם.",orPay:"תשלום אונליין (אשראי, Donors Fund, OJC, Matbia) או בזל (למטה ב\"צור קשר\").",payBtn:"תשלום אונליין",payNote:"כרטיס אשראי, Donors Fund, OJC, Matbia. כתבו בהערה עבור מה התשלום, או שלחו לגבאי וואטסאפ.",lSvc:"מה תרצו?",ok1:"קוויטל פעם אחת · $26",ok2:"קוויטל לחודש, כל יום · $30",oth:"ספר תהלים שלם · $350",oc:"הדלקת נר · $36",ocm:"נר עם משניות · $72",och:"חלות לשבת · $3 לחלה",opd:"פרנס היום, יום אחד · $1,000",opw:"פרנס היום, שבוע · $5,000",lQty:"כמה חלות?",lDate:"לאיזה יום?",lNames:"שמות (לזכות / לעילוי נשמת)",phNames:"לדוגמה: יעקב בן שרה",lYou:"השם שלכם",orTot:"סך הכל:",orBtn:"שליחת הבקשה בוואטסאפ",orLink:"לשליחת בקשה ←",orHead:"בקשה מהאתר",orNeed:"נא לכתוב לפחות שם אחד.",orSent:"וואטסאפ נפתח. לחצו שם על \"Send\".",title:"רבי ישעי'לע ביי רבי שמעון",
 brand:"רבי ישעי'לע<br>ביי רבי שמעון",nav1:"שליחות",nav2:"קוויטל",nav3:"פרנס היום",nav4:"צור קשר",
 stamp:"שליח אישי 24 שעות",h1:"השליח שלכם <em>למערת רבי שמעון</em> תוך 7 דקות!",
 lede:"ניתן לשלוח קוויטל, לומר תהלים, להדליק נר, ללמוד משניות, וכן פת שחרית למתפללי הוותיקין היומיים במירון.",
@@ -426,7 +433,7 @@ s4h:"משניות",s4p:"לימוד משניות לע״נ או לזכות, בצי
 kvEy:"קוויטל בוואטסאפ",kvH:"שלחו קוויטל",
 kvP1:'מלאו את הטופס ולחצו "הכנת הקוויטל". תראו את הקוויטל כקובץ PDF ותשלחו אותו לגבאי בוואטסאפ.',
 kvP2:"הגבאי מדבר אידיש, אנגלית ולשון הקודש.",
-lName:"שם",lMother:"שם האם",lFrom:"השם שלכם (השולח, לא חובה)",phFrom:"לדוגמה: משה גרינברג",gBen:"בן",gBas:"בת",lMore:"שמות נוספים (לא חובה)",phMore:"כל שם בשורה נפרדת, לדוגמה: חנה בת לאה",lWhat:"מה לעשות?",lReq:"בקשה",kvBtn:"הכנת הקוויטל",
+lName:"שם",lMother:"שם האם",lFrom:"השם שלכם (השולח, לא חובה)",phFrom:"לדוגמה: משה גרינברג",gBen:"בן",gBas:"בת",lMore:"שמות נוספים (לא חובה)",phMore:"כל שם בשורה נפרדת, לדוגמה: חנה בת לאה",lReq:"בקשה",kvBtn:"הכנת הקוויטל",
 kvNote:"ייווצר קוויטל PDF שתשלחו לגבאי בוואטסאפ.",
 rTitle:"הקוויטל מוכן",bShare:"שליחת ה-PDF בוואטסאפ",bDownload:"הורדת ה-PDF",bChat:"פתיחת הוואטסאפ של הגבאי",
 howShare:'בחרו בוואטסאפ ואז בגבאי (⁦+1 929-380-1124⁩). אם הוא לא שמור אצלכם, לחצו "פתיחת הוואטסאפ של הגבאי" וצרפו את ה-PDF.',
@@ -440,7 +447,7 @@ years:"הגבאי, שליח במירון 24 שעות",name:"מרדכי שמעו�
 lUS:"וואטסאפ:",lIL:"טלפון (לשיחות):",lEm:"אימייל:",copy:"העתקה",waBtn:"כתבו בוואטסאפ",
 ft1:"רבי ישעי'לע ביי רבי שמעון · מירון",ft2:"לוגו: Motty Media",
 needName:"נא לכתוב שם.",opened:'וואטסאפ נפתח. לחצו שם על "Send".',msgHead:"קוויטל לרבי שמעון",benbas:"בן/בת",copied:"הועתק"},
-en:{lOrReq:"What to pray for / anything else (optional)",nav5:"Request",orEy:"By WhatsApp",orH:"Send a request",orP:"Choose what you want, write the names, and press \"Send\". The request goes straight to the gabbai on WhatsApp, and he will get back to you.",orPay:"Pay online (credit card, Donors Fund, OJC, Matbia) or Zelle (below, under Contact).",payBtn:"Pay online",payNote:"Credit card, Donors Fund, OJC, Matbia. Write in the note what it's for, or send the gabbai a WhatsApp.",lSvc:"What would you like?",ok1:"Kvittel, one time · $26",ok2:"Kvittel for a month, every day · $30",oth:"A whole Sefer Tehillim · $350",oc:"Light a candle · $36",ocm:"Candle with Mishnayos · $72",och:"Challos for Shabbos · $3 a challah",opd:"Parnes hayom, one day · $1,000",opw:"Parnes hayom, one week · $5,000",lQty:"How many challos?",lDate:"Which day?",lNames:"Names (as a zechus / l'iluy nishmas)",phNames:"e.g. Yaakov ben Sarah",lYou:"Your name",orTot:"Total:",orBtn:"Send the request on WhatsApp",orLink:"Send a request →",orHead:"Request from the website",orNeed:"Please write at least one name.",orSent:"WhatsApp opened. Press \"Send\" there.",title:"Reb Shayele at Reb Shimon",
+en:{lPlan:"Kvittel",kp1:"One time · $26",kp2:"A month, every day · $30",lWhat:"Add (optional)",kx2:"A whole Sefer Tehillim · $350",kx3:"Light a candle · $36",kx4:"Candle with Mishnayos · $72",lOrReq:"What to pray for / anything else (optional)",nav5:"Request",orEy:"By WhatsApp",orH:"Send a request",orP:"Choose what you want, write the names, and press \"Send\". The request goes straight to the gabbai on WhatsApp, and he will get back to you.",orPay:"Pay online (credit card, Donors Fund, OJC, Matbia) or Zelle (below, under Contact).",payBtn:"Pay online",payNote:"Credit card, Donors Fund, OJC, Matbia. Write in the note what it's for, or send the gabbai a WhatsApp.",lSvc:"What would you like?",ok1:"Kvittel, one time · $26",ok2:"Kvittel for a month, every day · $30",oth:"A whole Sefer Tehillim · $350",oc:"Light a candle · $36",ocm:"Candle with Mishnayos · $72",och:"Challos for Shabbos · $3 a challah",opd:"Parnes hayom, one day · $1,000",opw:"Parnes hayom, one week · $5,000",lQty:"How many challos?",lDate:"Which day?",lNames:"Names (as a zechus / l'iluy nishmas)",phNames:"e.g. Yaakov ben Sarah",lYou:"Your name",orTot:"Total:",orBtn:"Send the request on WhatsApp",orLink:"Send a request →",orHead:"Request from the website",orNeed:"Please write at least one name.",orSent:"WhatsApp opened. Press \"Send\" there.",title:"Reb Shayele at Reb Shimon",
 brand:"Reb Shayele<br>at Reb Shimon",nav1:"Services",nav2:"Kvittel",nav3:"Sponsor a day",nav4:"Contact",
 stamp:"Your personal shliach, 24 hours a day",h1:"Your shliach at <em>Rabbi Shimon's tziyun</em> within 7 minutes!",
 lede:"Send a kvittel, have Tehillim said, light a candle or learn Mishnayos. You can also sponsor breakfast for the daily vasikin minyan in Meron.",
@@ -454,7 +461,7 @@ s4h:"Mishnayos",s4p:"Mishnayos learned l'iluy nishmas or as a zechus, at the hol
 kvEy:"Kvittel by WhatsApp",kvH:"Send a kvittel",
 kvP1:'Fill in the form and press "Make the kvittel". You\'ll see it as a PDF and send it to the gabbai on WhatsApp.',
 kvP2:"The gabbai speaks Yiddish, English and Hebrew.",
-lName:"Name",lMother:"Mother's name",lFrom:"Your name (sender, optional)",phFrom:"e.g. Moshe Greenberg",gBen:"son of",gBas:"daughter of",lMore:"More names (optional)",phMore:"One name per line, e.g. Chana bas Leah",lWhat:"What should be done?",lReq:"Request",kvBtn:"Make the kvittel",
+lName:"Name",lMother:"Mother's name",lFrom:"Your name (sender, optional)",phFrom:"e.g. Moshe Greenberg",gBen:"son of",gBas:"daughter of",lMore:"More names (optional)",phMore:"One name per line, e.g. Chana bas Leah",lReq:"Request",kvBtn:"Make the kvittel",
 kvNote:"This makes a PDF kvittel that you send to the gabbai on WhatsApp.",
 rTitle:"Your kvittel is ready",bShare:"Send the PDF on WhatsApp",bDownload:"Download the PDF",bChat:"Open the gabbai's WhatsApp",
 howShare:'Choose WhatsApp, then the gabbai (+1 929-380-1124). If he isn\'t in your contacts, press "Open the gabbai\'s WhatsApp" and attach the PDF.',
@@ -519,15 +526,21 @@ function val(id){return document.getElementById(id).value.trim()}
 function readForm(){
   var g=(form.querySelector('input[name="kvGender"]:checked')||{}).value||'ben';
   var svc=[].slice.call(form.querySelectorAll('.chips input[type="checkbox"]:checked'));
+  var plan=form.querySelector('input[name="kvPlan"]:checked');
+  var total=+plan.dataset.p;svc.forEach(function(x){total+=+x.dataset.p});
   return {name:val('kvName'),gender:g,mother:val('kvMother'),more:val('kvMore'),req:val('kvReq'),from:val('kvFrom'),
-    services:svc.map(function(x){return x.value}),serviceNames:svc.map(function(x){return x.nextElementSibling.textContent})};
+    services:['kvittel'].concat(svc.map(function(x){return x.value})),
+    serviceNames:[t('lPlan')+' '+plan.nextElementSibling.textContent].concat(svc.map(function(x){return x.nextElementSibling.textContent})),
+    total:'$'+total.toLocaleString('en-US')};
 }
+function kvTot(){var d=readForm();document.getElementById('kvTotal').textContent=d.total}
 function buildMsg(d){
   var bb=d.gender==='bas'?'בת':'בן';
-  return t('msgHead')+(d.from?' ('+d.from+')':'')+'\n'+d.name+(d.mother?' '+bb+' '+d.mother:'')+(d.more?'\n'+d.more:'')+(d.serviceNames.length?'\n'+d.serviceNames.join(', '):'')+(d.req?'\n'+d.req:'');
+  return t('msgHead')+(d.from?' ('+d.from+')':'')+'\n'+d.name+(d.mother?' '+bb+' '+d.mother:'')+(d.more?'\n'+d.more:'')+(d.serviceNames.length?'\n'+d.serviceNames.join(', '):'')+(d.total?'\n'+t('orTot')+' '+d.total:'')+(d.req?'\n'+d.req:'');
 }
 function canShareFiles(file){try{return !!(navigator.canShare&&navigator.share&&navigator.canShare({files:[file]}))}catch(e){return false}}
 function setHow(){if(!current)return;how.textContent=t(current.file&&canShareFiles(current.file)?'howShare':'howNoShare')}
+form.addEventListener('change',kvTot);kvTot();
 form.addEventListener('input',function(){if(!res.hidden){res.hidden=true;current=null;note.textContent=t('kvNote')}});
 document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setHow();if(current){chat.href=WA+encodeURIComponent(buildMsg(current.data)+'\n'+t('pdfNote'))}})});
 form.addEventListener('submit',function(e){
