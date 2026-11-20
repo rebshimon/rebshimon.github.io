@@ -85,13 +85,14 @@ nav a:hover{color:var(--ink)}
 
 /* services */
 .services .head{display:grid;gap:10px;max-width:40em}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-top:36px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.grid{grid-template-columns:1fr}}
 .svc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:grid;gap:8px;align-content:start}
 .svc svg{width:38px;height:38px;color:var(--gold)}
 .svc h3{font-size:1.45rem;font-weight:700}
 .svc p{color:var(--muted);font-size:1rem}
+.svc p.price{color:var(--gold);font-weight:800;font-size:1.15rem;margin-top:2px}
 
 /* kvittel form */
 .kvittel{background:var(--surface);border-block:1px solid var(--line)}
@@ -220,11 +221,13 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
         <article class="svc">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 5h15l6 6v24H10z"/><path d="M25 5v6h6M15 18h11M15 23h11M15 28h7"/></svg>
           <h3 data-i="s1h">קוויטל</h3>
+          <p class="price" data-i="s1$">$30 · טעגליכער קוויטל</p>
           <p data-i="s1p">שיקט די נעמען און די בקשה, און דער קוויטל ווערט געליינט ביים ציון.</p>
         </article>
         <article class="svc">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 9c-4-3-9-3-13-1v24c4-2 9-2 13 1 4-3 9-3 13-1V8c-4-2-9-2-13 1z"/><path d="M20 9v24"/></svg>
           <h3 data-i="s2h">תהלים</h3>
+          <p class="price" data-i="s2$">$350 · גאנץ תהלים</p>
           <p data-i="s2p">תהלים זאגן לזכות אדער לרפואה פאר די וואס איר בעט.</p>
         </article>
         <article class="svc">
@@ -236,6 +239,12 @@ html[lang="en"] .hero h1{font-size:clamp(2rem,5.2vw,3.6rem)}
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 10h12a2 2 0 0 1 2 2v22a3 3 0 0 0-3-3H6zM34 10H22a2 2 0 0 0-2 2v22a3 3 0 0 1 3-3h11z"/></svg>
           <h3 data-i="s4h">משניות</h3>
           <p data-i="s4p">משניות לערנען לע״נ אדער לזכות, ביים ציון הקדוש.</p>
+        </article>
+        <article class="svc">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 26c0-6 4-10 8-10 2-4 10-4 12 0 4 0 8 4 8 10 0 3-3 5-6 5H12c-3 0-6-2-6-5z"/><path d="M14 16c1 4 1 10 0 15M20 15v16M26 16c-1 4-1 10 0 15"/></svg>
+          <h3 data-i="s5h">חלות פאר שבת</h3>
+          <p class="price" data-i="s5$">$3 · א חלה, יעדן פרייטאג</p>
+          <p data-i="s5p">שטייט צו חלות וואס ווערן צעטיילט אין מירון ערב שבת.</p>
         </article>
       </div>
     </div>
@@ -353,7 +362,7 @@ svcP:"מרדכי שמעון חיימאוויטש משמש שליח במירון 
 s1h:"קוויטל",s1p:"שלחו את השמות והבקשה, והקוויטל ייקרא בציון.",
 s2h:"תהלים",s2p:"אמירת תהלים לזכות או לרפואה עבור מי שתבקשו.",
 s3h:"הדלקת נר",s3p:"נר יודלק בציון על שמכם.",
-s4h:"משניות",s4p:"לימוד משניות לע״נ או לזכות, בציון הקדוש.",
+s4h:"משניות",s4p:"לימוד משניות לע״נ או לזכות, בציון הקדוש.","s1$":"$30 · קוויטל יומי","s2$":"$350 · ספר תהלים שלם",s5h:"חלות לשבת","s5$":"$3 לחלה, כל יום שישי",s5p:"תרמו חלות שמחולקות במירון בערב שבת.",
 kvEy:"קוויטל בוואטסאפ",kvH:"שלחו קוויטל",
 kvP1:'מלאו את הטופס ולחצו "הכנת הקוויטל". תראו את הקוויטל כקובץ PDF ותשלחו אותו לגבאי בוואטסאפ.',
 kvP2:"הגבאי מדבר אידיש, אנגלית ולשון הקודש.",
@@ -381,7 +390,7 @@ svcP:"Mordechai Shimon Chaimowitz is your shliach in Meron 24 hours a day. Send 
 s1h:"Kvittel",s1p:"Send the names and your request, and the kvittel is read at the tziyun.",
 s2h:"Tehillim",s2p:"Tehillim said as a zechus or for a refuah, for whoever you ask.",
 s3h:"Light a candle",s3p:"A candle is lit at the tziyun in your name.",
-s4h:"Mishnayos",s4p:"Mishnayos learned l'iluy nishmas or as a zechus, at the holy tziyun.",
+s4h:"Mishnayos",s4p:"Mishnayos learned l'iluy nishmas or as a zechus, at the holy tziyun.","s1$":"$30 · daily kvittel","s2$":"$350 · full Tehillim",s5h:"Challos for Shabbos","s5$":"$3 a challah, every Friday",s5p:"Sponsor challos handed out in Meron every Friday.",
 kvEy:"Kvittel by WhatsApp",kvH:"Send a kvittel",
 kvP1:'Fill in the form and press "Make the kvittel". You\'ll see it as a PDF and send it to the gabbai on WhatsApp.',
 kvP2:"The gabbai speaks Yiddish, English and Hebrew.",
